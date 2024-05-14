@@ -1,0 +1,15 @@
+html {
+	background-color: black;
+	color: white;
+}
+
+#characterList {
+	list-style-type: none;
+	padding: 0;
+}
+
+.characterItem {
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	padding: 5px;
+}
