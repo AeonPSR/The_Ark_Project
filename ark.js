@@ -2,15 +2,36 @@
 import { names, jobs } from './arrays.js';
 import { getRandomInt, getRandomElementFromArray } from './small_tools.js';
 
+class Traits {
+	constructor(job, health, others) {
+		this.job = job;
+		this.health = health;
+		this.others = others || {};
+	}
+
+	addTrait(key, value) {
+		this.others[key] = value;
+	}
+
+	removeTrait(key) {
+		delete this.others[key];
+	}
+
+	displayTraits() {
+		return `Job: ${this.job} | Health: ${this.health} | Other Traits: ${JSON.stringify(this.others)}`;
+	}
+}
+
 class Character {
 	constructor(name, age, job) {
 		this.name = name;
 		this.age = age;
-		this.job = job;
 		this.status = "Alive";
+		this.traits = new Traits(job, health);
 	}
-	getInfo() {
-		return `Name: ${this.name} | Age: ${this.age} | Job: ${this.job} | Status: ${this.status}`;
+
+	getInfoDebug() {
+		return `Name: ${this.name} | Age: ${this.age} | Status: ${this.status} | Traits: ${this.traits.displayTraits()}`;
 	}
 }
 
@@ -41,7 +62,7 @@ function createCharacterList() {
 function displayCharacters(characters) {
 	const characterList = $('#characterList');
 	characters.forEach(character => {
-		const listItem = $('<li>').addClass('characterItem').text(character.getInfo());
+		const listItem = $('<li>').addClass('characterItem').text(character.getInfoDebug());
 		characterList.append(listItem);
 	});
 }
