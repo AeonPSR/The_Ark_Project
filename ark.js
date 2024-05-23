@@ -3,9 +3,9 @@ import { names, jobs } from './arrays.js';
 import { getRandomInt, getRandomElementFromArray } from './small_tools.js';
 
 class Traits {
-	constructor(job, health, others) {
-		this.job = job;
-		this.health = health;
+	constructor(others) {
+		this.job = getRandomElementFromArray(jobs);
+		this.health = "Alive";
 		this.others = others || {};
 	}
 
