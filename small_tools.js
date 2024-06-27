@@ -6,4 +6,12 @@ function getRandomElementFromArray(array) {
 	return array[Math.floor(Math.random() * array.length)];
 }
 
-export {getRandomInt, getRandomElementFromArray};
+function getStatMod(stat) {
+    if (stat % 2 == 1)
+        stat--;
+    mod = stat - 10;
+    mod = mod/2;
+	return mod;
+}
+
+export {getRandomInt, getRandomElementFromArray, getStatMod};

@@ -1,6 +1,6 @@
 //import { startGame, endGame, playerMove } from './gameFunctions.js';
 import { names, jobs } from './arrays.js';
-import { getRandomInt, getRandomElementFromArray } from './small_tools.js';
+import { getRandomInt, getRandomElementFromArray, getStatMod } from './small_tools.js';
 
 class Traits {
 	constructor(others) {
@@ -18,7 +18,7 @@ class Traits {
 	}
 
 	displayTraits() {
-		return `Job: ${this.job} | Health: ${this.health} | Other Traits: ${JSON.stringify(this.others)}`;
+		return `<br />Job: ${this.job} | Health: ${this.health}| Other Traits: ${JSON.stringify(this.others).replace(/,/g, '<br />')}`;
 	}
 }
 
@@ -27,11 +27,30 @@ class Character {
 		this.name = name;
 		this.age = age;
 		this.status = "Alive";
-		this.traits = new Traits(job, health);
+		this.traits = new Traits(job);
+		this.stats = {
+			strength: getRandomInt(18),
+			dexterity: getRandomInt(18),
+			constitution: getRandomInt(18),
+			intelligence: getRandomInt(18),
+			wisdom: getRandomInt(18),
+			charisma: getRandomInt(18),
+			perception: getRandomInt(18),
+			luck: getRandomInt(18),
+		};
 	}
 
 	getInfoDebug() {
-		return `Name: ${this.name} | Age: ${this.age} | Status: ${this.status} | Traits: ${this.traits.displayTraits()}`;
+		return `Name: ${this.name} | Age: ${this.age} | Status: ${this.status} <br /><br />
+		Strength: ${this.stats.strength}<br />
+		Dexterity: ${this.stats.strength}<br />
+		Constitution: ${this.stats.strength}<br />
+		Intelligence: ${this.stats.strength}<br />
+		Wisdom: ${this.stats.strength}<br />
+		Charisma:${this.stats.strength}<br />
+		Perception: ${this.stats.strength}<br />
+		Luck: ${this.stats.strength}<br />
+		<br />${this.traits.displayTraits()}`;
 	}
 }
 
@@ -62,7 +81,7 @@ function createCharacterList() {
 function displayCharacters(characters) {
 	const characterList = $('#characterList');
 	characters.forEach(character => {
-		const listItem = $('<li>').addClass('characterItem').text(character.getInfoDebug());
+		const listItem = $('<li>').addClass('characterItem').html(character.getInfoDebug());
 		characterList.append(listItem);
 	});
 }
